@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EduTechSpA - Dashboard</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        nav ul { list-style: none; padding: 0; display: flex; gap: 10px; }
+        nav a { text-decoration: none; background: #007bff; color: white; padding: 6px 12px; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f5f5f5; }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Inicio</a></li>
+        <li><a th:href="@{/curso}">Curso</a></li>
+        <li><a th:href="@{/evaluacion}">Evaluacion</a></li>
+        <li><a th:href="@{/inscripcion}">Inscripcion</a></li>
+        <li><a th:href="@{/notificacion}">Notificacion</a></li>
+        <li><a th:href="@{/pago}">Pago</a></li>
+        <li><a th:href="@{/reporte}">Reporte</a></li>
+        <li><a th:href="@{/usuario}">Usuario</a></li>
+    </ul>
+</nav>
+<div>
+    <th:block th:replace="~{::section}"></th:block>
+</div>
+</body>
+</html>

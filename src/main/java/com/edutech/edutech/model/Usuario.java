@@ -1,24 +1,33 @@
 package com.edutech.edutech.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
-
-    @Column(unique = true)
     private String email;
+    private String rol;
+    private String estado;
 
-    private String rol; // ADMIN, GERENTE, ESTUDIANTE
+    // Método necesario para Spring Security
+    public String getUsername() {
+        return this.email;  // O this.nombre si prefieres usar nombre para login
+    }
 
-    private String estado; // ACTIVO, INACTIVO
+    // Opcional: si usas password, también debe tener getPassword()
+    private String password;
+    public String getPassword() {
+        return this.password;
+    }
 }

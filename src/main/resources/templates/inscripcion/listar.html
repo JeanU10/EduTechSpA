@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: section">
+<section>
+  <h2>Listado de Inscripcions</h2>
+  <a th:href="@{/inscripcion/nuevo}" class="btn">Nuevo Inscripcion</a>
+  <table>
+    <thead>
+    <tr>
+      <th>idInscripcion</th><th>fecha</th><th>estado</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="inscripcion : ${{inscripcions}}">
+      <td th:text="${inscripcion.idInscripcion}"></td>
+      <td th:text="${inscripcion.fecha}"></td>
+      <td th:text="${inscripcion.estado}"></td>
+      <td>
+        <a th:href="@{'/inscripcion/ver/' + ${inscripcion.idInscripcion}}">Ver</a> |
+        <a th:href="@{'/inscripcion/editar/' + ${inscripcion.idInscripcion}}">Editar</a> |
+        <a th:href="@{'/inscripcion/eliminar/' + ${inscripcion.idInscripcion}}">Eliminar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: section">
+<section>
+  <h2>Listado de Pagos</h2>
+  <a th:href="@{/pago/nuevo}" class="btn">Nuevo Pago</a>
+  <table>
+    <thead>
+    <tr>
+      <th>idPago</th><th>monto</th><th>fechaPago</th><th>metodoPago</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pago : ${{pagos}}">
+      <td th:text="${pago.idPago}"></td>
+      <td th:text="${pago.monto}"></td>
+      <td th:text="${pago.fechaPago}"></td>
+      <td th:text="${pago.metodoPago}"></td>
+      <td>
+        <a th:href="@{'/pago/ver/' + ${pago.idPago}}">Ver</a> |
+        <a th:href="@{'/pago/editar/' + ${pago.idPago}}">Editar</a> |
+        <a th:href="@{'/pago/eliminar/' + ${pago.idPago}}">Eliminar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+</html>

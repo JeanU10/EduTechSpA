@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: section">
+<section>
+    <h2>Listado de Notificacions</h2>
+    <a th:href="@{/notificacion/nuevo}" class="btn">Nuevo Notificacion</a>
+    <table>
+        <thead>
+        <tr>
+            <th>idNotificacion</th><th>mensaje</th><th>fecha</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="notificacion : ${{notificacions}}">
+            <td th:text="${notificacion.idNotificacion}"></td>
+            <td th:text="${notificacion.mensaje}"></td>
+            <td th:text="${notificacion.fecha}"></td>
+            <td>
+                <a th:href="@{'/notificacion/ver/' + ${notificacion.idNotificacion}}">Ver</a> |
+                <a th:href="@{'/notificacion/editar/' + ${notificacion.idNotificacion}}">Editar</a> |
+                <a th:href="@{'/notificacion/eliminar/' + ${notificacion.idNotificacion}}">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</html>
