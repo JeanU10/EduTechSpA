@@ -1,9 +1,11 @@
 package com.edutech.edutech.service;
 
 import com.edutech.edutech.model.Pago;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface PagoService {
     Pago save(Pago pago);
     List<Pago> getAll();
