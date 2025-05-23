@@ -2,43 +2,41 @@ package com.edutech.edutech.controller;
 
 import com.edutech.edutech.model.Evaluacion;
 import com.edutech.edutech.service.EvaluacionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/evaluaciones")
-@CrossOrigin
+@RequestMapping("/evaluaciones")
+@CrossOrigin(origins = "*")
 public class EvaluacionController {
 
-    private final EvaluacionService service;
-
-    public EvaluacionController(EvaluacionService service) {
-        this.service = service;
-    }
-
-    @PostMapping
-    public Evaluacion save(@RequestBody Evaluacion evaluacion) {
-        return service.save(evaluacion);
-    }
+    @Autowired
+    private EvaluacionService evaluacionService;
 
     @GetMapping
-    public List<Evaluacion> list() {
-        return service.getAll();
+    public List<Evaluacion> listar() {
+        return evaluacionService.obtenerTodas();
     }
 
     @GetMapping("/{id}")
-    public Evaluacion get(@PathVariable Long id) {
-        return service.getById(id);
+    public Evaluacion obtener(@PathVariable Long id) {
+        return evaluacionService.obtenerPorId(id);
+    }
+
+    @PostMapping
+    public Evaluacion crear(@RequestBody Evaluacion evaluacion) {
+        return evaluacionService.guardar(evaluacion);
     }
 
     @PutMapping("/{id}")
-    public Evaluacion update(@PathVariable Long id, @RequestBody Evaluacion evaluacion) {
-        return service.update(id, evaluacion);
+    public Evaluacion actualizar(@PathVariable Long id, @RequestBody Evaluacion evaluacion) {
+        return evaluacionService.actualizar(id, evaluacion);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public void eliminar(@PathVariable Long id) {
+        evaluacionService.eliminar(id);
     }
 }

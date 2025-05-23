@@ -15,10 +15,7 @@ public class Evaluacion {
     private Long id;
 
     private String titulo;
-
     private String descripcion;
-
-    private String tipo; // Quiz, Examen, Tarea
-
-    private Long idCurso;
+    private int puntajeMaximo;
+    private Long cursoId;
 }

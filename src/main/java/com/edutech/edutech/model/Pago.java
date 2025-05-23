@@ -16,13 +16,11 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long idUsuario;
+    private Long usuarioId;
 
     private Double monto;
 
-    private String metodo; // TARJETA, TRANSFERENCIA, PAYPAL
-
     private LocalDate fechaPago;
 
-    private String estado; // COMPLETADO, PENDIENTE, FALLIDO
+    private String metodoPago;
 }

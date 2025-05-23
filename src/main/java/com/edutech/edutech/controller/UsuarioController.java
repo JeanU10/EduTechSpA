@@ -2,43 +2,41 @@ package com.edutech.edutech.controller;
 
 import com.edutech.edutech.model.Usuario;
 import com.edutech.edutech.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuarios")
-@CrossOrigin
+@RequestMapping("/usuarios")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
 
-    private final UsuarioService service;
+    @Autowired
+    private UsuarioService usuarioService;
 
-    public UsuarioController(UsuarioService service) {
-        this.service = service;
+    @GetMapping
+    public List<Usuario> listar() {
+        return usuarioService.obtenerTodos();
     }
 
     @PostMapping
-    public Usuario save(@RequestBody Usuario usuario) {
-        return service.save(usuario);
-    }
-
-    @GetMapping
-    public List<Usuario> list() {
-        return service.getAll();
+    public Usuario crear(@RequestBody Usuario usuario) {
+        return usuarioService.guardar(usuario);
     }
 
     @GetMapping("/{id}")
-    public Usuario get(@PathVariable Long id) {
-        return service.getById(id);
+    public Usuario obtenerPorId(@PathVariable Long id) {
+        return usuarioService.obtenerPorId(id);
     }
 
     @PutMapping("/{id}")
-    public Usuario update(@PathVariable Long id, @RequestBody Usuario usuario) {
-        return service.update(id, usuario);
+    public Usuario actualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+        return usuarioService.actualizar(id, usuario);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public void eliminar(@PathVariable Long id) {
+        usuarioService.eliminar(id);
     }
 }

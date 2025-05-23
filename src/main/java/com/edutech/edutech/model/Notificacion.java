@@ -3,8 +3,6 @@ package com.edutech.edutech.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,11 +14,9 @@ public class Notificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long usuarioId;
+
     private String mensaje;
 
-    private String tipo; // INFO, ALERTA, RECORDATORIO
-
-    private Long idUsuario;
-
-    private LocalDateTime fechaEnvio;
+    private boolean leida;
 }

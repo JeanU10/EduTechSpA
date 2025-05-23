@@ -3,7 +3,7 @@ package com.edutech.edutech.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -16,9 +16,11 @@ public class Reporte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String tipo; // CURSOS, USUARIOS, PAGOS
+    private String tipo;
 
     private String descripcion;
 
-    private LocalDateTime fechaGeneracion;
+    private LocalDate fechaGeneracion;
+
+    private Long usuarioId; // Quién generó el reporte, opcional
 }

@@ -2,43 +2,46 @@ package com.edutech.edutech.controller;
 
 import com.edutech.edutech.model.Pago;
 import com.edutech.edutech.service.PagoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/pagos")
-@CrossOrigin
+@RequestMapping("/pagos")
+@CrossOrigin(origins = "*")
 public class PagoController {
 
-    private final PagoService service;
-
-    public PagoController(PagoService service) {
-        this.service = service;
-    }
-
-    @PostMapping
-    public Pago save(@RequestBody Pago pago) {
-        return service.save(pago);
-    }
+    @Autowired
+    private PagoService pagoService;
 
     @GetMapping
-    public List<Pago> list() {
-        return service.getAll();
+    public List<Pago> listar() {
+        return pagoService.obtenerTodos();
+    }
+
+    @GetMapping("/usuario/{usuarioId}")
+    public List<Pago> listarPorUsuario(@PathVariable Long usuarioId) {
+        return pagoService.obtenerPorUsuarioId(usuarioId);
     }
 
     @GetMapping("/{id}")
-    public Pago get(@PathVariable Long id) {
-        return service.getById(id);
+    public Pago obtener(@PathVariable Long id) {
+        return pagoService.obtenerPorId(id);
+    }
+
+    @PostMapping
+    public Pago crear(@RequestBody Pago pago) {
+        return pagoService.guardar(pago);
     }
 
     @PutMapping("/{id}")
-    public Pago update(@PathVariable Long id, @RequestBody Pago pago) {
-        return service.update(id, pago);
+    public Pago actualizar(@PathVariable Long id, @RequestBody Pago pago) {
+        return pagoService.actualizar(id, pago);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public void eliminar(@PathVariable Long id) {
+        pagoService.eliminar(id);
     }
 }

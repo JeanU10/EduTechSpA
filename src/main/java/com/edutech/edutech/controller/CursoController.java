@@ -2,43 +2,41 @@ package com.edutech.edutech.controller;
 
 import com.edutech.edutech.model.Curso;
 import com.edutech.edutech.service.CursoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cursos")
-@CrossOrigin
+@RequestMapping("/cursos")
+@CrossOrigin(origins = "*")
 public class CursoController {
 
-    private final CursoService service;
-
-    public CursoController(CursoService service) {
-        this.service = service;
-    }
-
-    @PostMapping
-    public Curso save(@RequestBody Curso curso) {
-        return service.save(curso);
-    }
+    @Autowired
+    private CursoService cursoService;
 
     @GetMapping
-    public List<Curso> list() {
-        return service.getAll();
+    public List<Curso> listar() {
+        return cursoService.obtenerTodos();
     }
 
     @GetMapping("/{id}")
-    public Curso get(@PathVariable Long id) {
-        return service.getById(id);
+    public Curso obtener(@PathVariable Long id) {
+        return cursoService.obtenerPorId(id);
+    }
+
+    @PostMapping
+    public Curso crear(@RequestBody Curso curso) {
+        return cursoService.guardar(curso);
     }
 
     @PutMapping("/{id}")
-    public Curso update(@PathVariable Long id, @RequestBody Curso curso) {
-        return service.update(id, curso);
+    public Curso actualizar(@PathVariable Long id, @RequestBody Curso curso) {
+        return cursoService.actualizar(id, curso);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public void eliminar(@PathVariable Long id) {
+        cursoService.eliminar(id);
     }
 }

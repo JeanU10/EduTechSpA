@@ -2,43 +2,46 @@ package com.edutech.edutech.controller;
 
 import com.edutech.edutech.model.Notificacion;
 import com.edutech.edutech.service.NotificacionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/notificaciones")
-@CrossOrigin
+@RequestMapping("/notificaciones")
+@CrossOrigin(origins = "*")
 public class NotificacionController {
 
-    private final NotificacionService service;
-
-    public NotificacionController(NotificacionService service) {
-        this.service = service;
-    }
-
-    @PostMapping
-    public Notificacion save(@RequestBody Notificacion notificacion) {
-        return service.save(notificacion);
-    }
+    @Autowired
+    private NotificacionService notificacionService;
 
     @GetMapping
-    public List<Notificacion> list() {
-        return service.getAll();
+    public List<Notificacion> listar() {
+        return notificacionService.obtenerTodas();
+    }
+
+    @GetMapping("/usuario/{usuarioId}")
+    public List<Notificacion> listarPorUsuario(@PathVariable Long usuarioId) {
+        return notificacionService.obtenerPorUsuarioId(usuarioId);
     }
 
     @GetMapping("/{id}")
-    public Notificacion get(@PathVariable Long id) {
-        return service.getById(id);
+    public Notificacion obtener(@PathVariable Long id) {
+        return notificacionService.obtenerPorId(id);
+    }
+
+    @PostMapping
+    public Notificacion crear(@RequestBody Notificacion notificacion) {
+        return notificacionService.guardar(notificacion);
     }
 
     @PutMapping("/{id}")
-    public Notificacion update(@PathVariable Long id, @RequestBody Notificacion notificacion) {
-        return service.update(id, notificacion);
+    public Notificacion actualizar(@PathVariable Long id, @RequestBody Notificacion notificacion) {
+        return notificacionService.actualizar(id, notificacion);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public void eliminar(@PathVariable Long id) {
+        notificacionService.eliminar(id);
     }
 }

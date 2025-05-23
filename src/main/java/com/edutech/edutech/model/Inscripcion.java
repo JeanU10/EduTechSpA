@@ -11,16 +11,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class Inscripcion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long idUsuario;
+    private Long usuarioId;
+    private Long cursoId;
 
-    private Long idCurso;
-
-    private LocalDate fecha;
-
-    private String estado; // ACTIVA, CANCELADA
+    private LocalDate fechaInscripcion;
 }
