@@ -1,7 +1,6 @@
 package com.edutech.microservicios.repository;
 
-
-import com.example.microservicioedutech.model.Curso;
+import com.edutech.microservicios.model.Curso;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CursoRepository extends JpaRepository<Curso, Long> {

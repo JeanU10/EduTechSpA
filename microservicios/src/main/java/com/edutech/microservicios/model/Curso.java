@@ -1,49 +1,31 @@
 package com.edutech.microservicios.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "cursos")
 public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nombre;
+
     private String descripcion;
-    private String instructor;
 
-    // Getters y Setters
+    private boolean activo = true;
 
-    public Long getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
+    private List<Contenido> contenidos;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getInstructor() {
-        return instructor;
-    }
-
-    public void setInstructor(String instructor) {
-        this.instructor = instructor;
-    }
+    @Column(nullable = false)
+    private Long instructorId; // Id del instructor asignado
 }
