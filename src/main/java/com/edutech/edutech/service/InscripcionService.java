@@ -43,7 +43,7 @@ public class InscripcionService {
         inscripcionRepository.deleteById(id);
     }
 
-    // Métodos simulados para comunicación con otros servicios (por ahora solo mocks)
+    // Métodos simulados para comunicar con otros servicios
     public String obtenerNombreUsuario(Long usuarioId) {
         // Aquí iría la llamada real o simulación
         return "Usuario #" + usuarioId;

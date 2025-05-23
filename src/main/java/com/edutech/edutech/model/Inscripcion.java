@@ -1,6 +1,7 @@
 package com.edutech.edutech.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -15,7 +16,10 @@ public class Inscripcion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "usuarioId es obligatorio")
     private Long usuarioId;
+
+    @NotNull(message = "cursoId es obligatorio")
     private Long cursoId;
 
     private LocalDate fechaInscripcion;

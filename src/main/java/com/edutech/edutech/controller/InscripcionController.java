@@ -2,6 +2,7 @@ package com.edutech.edutech.controller;
 
 import com.edutech.edutech.model.Inscripcion;
 import com.edutech.edutech.service.InscripcionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,13 +34,13 @@ public class InscripcionController {
     }
 
     @PostMapping
-    public ResponseEntity<Inscripcion> crearInscripcion(@RequestBody Inscripcion inscripcion) {
+    public ResponseEntity<Inscripcion> crear(@Valid @RequestBody Inscripcion inscripcion) {
         String nombreUsuario = inscripcionService.obtenerNombreUsuario(inscripcion.getUsuarioId());
         String nombreCurso = inscripcionService.obtenerNombreCurso(inscripcion.getCursoId());
 
         System.out.println("Inscribiendo al usuario: " + nombreUsuario + " al curso: " + nombreCurso);
 
-        Inscripcion nueva = inscripcionService.crearInscripcion(inscripcion);
+        Inscripcion nueva = inscripcionService.guardar(inscripcion);
         return new ResponseEntity<>(nueva, HttpStatus.CREATED);
     }
 
